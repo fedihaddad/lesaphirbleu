@@ -1,13 +1,32 @@
 import React from 'react'
 
+// --- Icon Components ---
+
 function IconMenu(){
   return (
-    <img 
-      src="/assets/icon.png" 
-      alt="Menu Icon" 
+    <img
+      src="/assets/icon.png"
+      alt="Menu Icon"
       className="w-6 h-6 object-contain"
     />
   )
+}
+
+function IconPhone() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
+}
+
+function IconEmail() {
+  return (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+      <polyline points="22,6 12,13 2,6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round"/>
+    </svg>
+  );
 }
 
 function IconFacebook(){
@@ -58,32 +77,30 @@ function IconGoogle(){
   )
 }
 
+// --- Reusable Button Component ---
+
 function ActionButton({ href = '#', label, Icon, variant = 'secondary', ariaLabel, onClick }){
   const base = "flex items-center gap-3 px-5 py-4 rounded-2xl transition-all duration-300 focus:outline-none transform hover:scale-[1.02] active:scale-[0.98] shadow-sm hover:shadow-md";
   const style = variant === 'primary'
     ? 'bg-gradient-to-r from-blue-600 to-indigo-600 text-white hover:from-blue-700 hover:to-indigo-700 shadow-lg hover:shadow-xl'
     : 'bg-slate-50 text-slate-800 hover:bg-slate-100 border border-slate-200 hover:border-slate-300';
 
-  // Simple icon container - just the right size
   const iconClass = 'flex-shrink-0 w-8 h-8 flex items-center justify-center';
 
-  // if onClick is provided, render a button element to handle in-app navigation
   if (onClick) {
     return (
-      <button 
-        type="button" 
+      <button
+        type="button"
         onClick={(e) => {
           onClick();
-          // Clear focus after click to prevent stuck states
           e.currentTarget.blur();
         }}
         onMouseLeave={(e) => {
-          // Clear any stuck focus states on mouse leave
           if (document.activeElement === e.currentTarget) {
             e.currentTarget.blur();
           }
         }}
-        className={`${base} ${style}`} 
+        className={`${base} ${style}`}
         aria-label={ariaLabel || label}
       >
         <div className={iconClass}>
@@ -97,23 +114,20 @@ function ActionButton({ href = '#', label, Icon, variant = 'secondary', ariaLabe
     )
   }
 
-  // Check if it's an internal link (starts with /) to avoid opening in new tab
-  const isInternalLink = href.startsWith('/');
-  
+  const isInternalLink = href.startsWith('/') || href.startsWith('#');
+
   return (
-    <a 
-      href={href} 
-      className={`${base} ${style}`} 
+    <a
+      href={href}
+      className={`${base} ${style}`}
       {...(!isInternalLink && { target: "_blank", rel: "noopener noreferrer" })}
       aria-label={ariaLabel || label}
       onMouseLeave={(e) => {
-        // Clear any stuck focus states on mouse leave
         if (document.activeElement === e.currentTarget) {
           e.currentTarget.blur();
         }
       }}
       onClick={(e) => {
-        // Clear focus after click for better UX
         setTimeout(() => {
           if (document.activeElement === e.currentTarget) {
             e.currentTarget.blur();
@@ -132,20 +146,15 @@ function ActionButton({ href = '#', label, Icon, variant = 'secondary', ariaLabe
   )
 }
 
+// --- Main Restaurant Card Component ---
+
 export default function RestaurantCard(){
   const [isAnimated, setIsAnimated] = React.useState(false)
   const [showContent, setShowContent] = React.useState(false)
 
   React.useEffect(() => {
-    // Start the logo animation immediately
-    const timer1 = setTimeout(() => {
-      setIsAnimated(true)
-    }, 500)
-
-    // Show the full content after logo animation
-    const timer2 = setTimeout(() => {
-      setShowContent(true)
-    }, 2000)
+    const timer1 = setTimeout(() => setIsAnimated(true), 500)
+    const timer2 = setTimeout(() => setShowContent(true), 2000)
 
     return () => {
       clearTimeout(timer1)
@@ -164,7 +173,6 @@ export default function RestaurantCard(){
             isAnimated ? 'scale-100 opacity-100' : 'scale-75 opacity-0'
           }`}>
             <div className="relative mb-8">
-              {/* Floating particles background */}
               <div className="absolute -inset-20 overflow-hidden pointer-events-none">
                 <div className="absolute top-0 left-1/4 w-2 h-2 bg-white/20 rounded-full animate-bounce" style={{ animationDelay: '0s', animationDuration: '3s' }}></div>
                 <div className="absolute top-10 right-1/4 w-1 h-1 bg-blue-200/30 rounded-full animate-bounce" style={{ animationDelay: '1s', animationDuration: '4s' }}></div>
@@ -172,16 +180,14 @@ export default function RestaurantCard(){
               </div>
               
               <div className="w-44 h-44 mx-auto rounded-full bg-white/25 backdrop-blur-md border-2 border-white/40 shadow-2xl flex items-center justify-center p-3 relative overflow-hidden">
-                {/* Subtle shimmer effect */}
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-white/10 to-transparent transform rotate-45"></div>
-                <img 
-                  src="/assets/lesaphir.webp" 
-                  alt="Le Saphir Bleu profile" 
-                  className="w-full h-full rounded-full object-cover relative z-10" 
+                <img
+                  src="/assets/lesaphir.webp"
+                  alt="Le Saphir Bleu profile"
+                  className="w-full h-full rounded-full object-cover relative z-10"
                 />
               </div>
               
-              {/* Multiple animated rings */}
               <div className={`absolute inset-0 rounded-full border-2 border-white/20 ${isAnimated ? 'animate-ping' : ''}`} style={{ animationDuration: '2s' }}></div>
               <div className={`absolute inset-2 rounded-full border border-blue-200/30 ${isAnimated ? 'animate-pulse' : ''}`} style={{ animationDuration: '3s' }}></div>
             </div>
@@ -195,7 +201,6 @@ export default function RestaurantCard(){
             }`} style={{ textShadow: '1px 1px 4px rgba(0,0,0,0.4)' }}>
               Restaurant Authentique
             </p>
-            {/* Loading dots */}
             <div className={`flex justify-center mt-8 space-x-2 transition-all duration-1000 delay-1000 ${
               isAnimated ? 'opacity-100' : 'opacity-0'
             }`}>
@@ -234,15 +239,18 @@ export default function RestaurantCard(){
             showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
           }`} aria-label="Liens rapides">
             <ActionButton href="/menu" label="Notre Menu" Icon={IconMenu} variant="primary" ariaLabel="Voir notre menu" />
+
             <ActionButton href="https://www.facebook.com/share/1G5Mk1hLoE/" label="Facebook" Icon={IconFacebook} ariaLabel="Visiter Facebook" />
             <ActionButton href="https://www.instagram.com/le.saphir.bleu?igsh=MWxsaTJuYmMybGYyag==" label="Instagram" Icon={IconInstagram} ariaLabel="Visiter Instagram" />
 
-            {/* Maps Section */}
+            {/* Phone & Email placed after social links per request */}
+            <ActionButton href="tel:+21626363180" label="Appeler (26 363 180)" Icon={IconPhone} ariaLabel="Appeler le restaurant" />
+            <ActionButton href="mailto:lesaphireblue@gmail.com" label="Envoyer un Email" Icon={IconEmail} ariaLabel="Envoyer un email au restaurant" />
+
             <div className={`mt-8 transition-all duration-1000 delay-700 ${
               showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>
               <div className="bg-gradient-to-br from-slate-50 via-blue-50/50 to-indigo-50/30 rounded-2xl p-6 shadow-lg border border-slate-200/50 relative overflow-hidden">
-                {/* Decorative background pattern */}
                 <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100/20 to-transparent rounded-full transform translate-x-16 -translate-y-16"></div>
                 
                 <div className="text-center mb-5 relative z-10">
@@ -264,10 +272,8 @@ export default function RestaurantCard(){
                   </div>
                 </div>
 
-                {/* Map Container - Bigger and mobile optimized */}
                 <div className="relative bg-white rounded-lg overflow-hidden shadow-sm mb-3">
                   <div className="w-full h-48 sm:h-56 lg:h-64">
-                    {/* Static Google Maps - Replace coordinates with actual restaurant location */}
                     <iframe
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3162.8!2d11.036570!3d35.387264!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzUuMzg3MjY0LCAxMS4wMzY1NzA!5e0!3m2!1sfr!2stn!4v1698672800000!5m2!1sfr!2stn"
                       width="100%"
@@ -280,7 +286,6 @@ export default function RestaurantCard(){
                     ></iframe>
                   </div>
                   
-                  {/* Map overlay with restaurant info */}
                   <div className="absolute top-3 left-3 right-3">
                     <div className="bg-white/90 backdrop-blur-sm rounded-lg p-2 shadow-md">
                       <div className="flex items-center gap-2">
@@ -291,12 +296,10 @@ export default function RestaurantCard(){
                   </div>
                 </div>
 
-                {/* Share Button Only */}
                 <div className="text-center">
-                  <button 
+                  <button
                     className="bg-green-500 hover:bg-green-600 text-white px-6 py-2 rounded-lg font-medium text-sm transition-colors flex items-center justify-center gap-2 mx-auto focus:outline-none focus:ring-2 focus:ring-green-300 active:scale-95"
                     onClick={(e) => {
-                      // Share location functionality
                       if (navigator.share) {
                         navigator.share({
                           title: 'Le Saphir Bleu - Localisation',
@@ -304,10 +307,8 @@ export default function RestaurantCard(){
                           url: `https://www.google.com/maps?q=35.387264,11.036570`
                         });
                       } else {
-                        // Fallback: copy to clipboard
-                        navigator.clipboard.writeText(`Le Saphir Bleu - https://www.google.com/maps?q=35.387264,11.036570`);
+                        navigator.clipboard.writeText(`Le Saphir Bleu - [https://www.google.com/maps?q=35.387264](https://www.google.com/maps?q=35.387264),11.036570`);
                       }
-                      // Clear focus after click
                       e.currentTarget.blur();
                     }}
                     onMouseLeave={(e) => {
@@ -325,7 +326,6 @@ export default function RestaurantCard(){
               </div>
             </div>
 
-            {/* Restaurant Hours */}
             <div className={`mt-8 transition-all duration-1000 delay-900 ${
               showContent ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'
             }`}>

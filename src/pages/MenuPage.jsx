@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react'
 
-function Item({ name, price, desc }){
+function Item({ name, price, desc }) {
   return (
     <div className="menu-item group relative overflow-hidden rounded-2xl transition-all duration-300 transform hover:scale-[1.02] bg-white border border-slate-200 hover:shadow-xl hover:border-blue-200 shadow-sm">
       <div className="p-5">
@@ -15,7 +15,7 @@ function Item({ name, price, desc }){
               </p>
             )}
           </div>
-          
+
           <div className="flex-shrink-0">
             <span className="px-4 py-2 rounded-full text-base font-bold shadow-md transition-all duration-200 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow-blue-200 group-hover:shadow-lg">
               {price} DT
@@ -23,16 +23,16 @@ function Item({ name, price, desc }){
           </div>
         </div>
       </div>
-      
+
       {/* Subtle gradient overlay for hover effect */}
       <div className="absolute inset-0 transition-opacity duration-300 opacity-0 group-hover:opacity-5 bg-gradient-to-r from-blue-500 to-purple-500"></div>
     </div>
   )
 }
 
-function CategoryCard({ category, onClick, image, itemCount, isSelected }){
+function CategoryCard({ category, onClick, image, itemCount, isSelected }) {
   return (
-    <div 
+    <div
       onClick={onClick}
       onKeyDown={(e) => e.key === 'Enter' && onClick()}
       onMouseLeave={() => {
@@ -43,24 +43,23 @@ function CategoryCard({ category, onClick, image, itemCount, isSelected }){
       tabIndex={0}
       role="button"
       aria-label={`Voir les plats de la catégorie ${category}`}
-      className={`group relative overflow-hidden rounded-2xl bg-white border transition-all duration-400 cursor-pointer transform focus:outline-none ${
-        isSelected 
-          ? 'border-blue-400 ring-2 ring-blue-200 shadow-xl scale-[1.01]' 
-          : 'border-slate-200/50 hover:border-blue-300/60 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1'
-      }`}
+      className={`group relative overflow-hidden rounded-2xl bg-white border transition-all duration-400 cursor-pointer transform focus:outline-none ${isSelected
+        ? 'border-blue-400 ring-2 ring-blue-200 shadow-xl scale-[1.01]'
+        : 'border-slate-200/50 hover:border-blue-300/60 focus:border-blue-400 focus:ring-2 focus:ring-blue-200 shadow-md hover:shadow-2xl hover:scale-[1.02] hover:-translate-y-1'
+        }`}
     >
       {/* Horizontal Layout: Image Left, Text Right */}
       <div className="flex items-center h-28">
         {/* Left Side - Image */}
         <div className="w-28 h-28 flex-shrink-0 relative">
-          <img 
-            src={image || '/assets/cover.jpg'} 
+          <img
+            src={image || '/assets/cover.jpg'}
             alt={category}
             className="w-full h-full object-cover rounded-l-2xl transition-transform duration-400 group-hover:scale-110"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-transparent to-black/5 rounded-l-2xl"></div>
         </div>
-        
+
         {/* Right Side - Text Content */}
         <div className="flex-1 p-5 pl-4">
           <div className="flex flex-col justify-center h-full">
@@ -81,10 +80,10 @@ function CategoryCard({ category, onClick, image, itemCount, isSelected }){
           </div>
         </div>
       </div>
-      
+
       {/* Professional hover effect overlay */}
       <div className="absolute inset-0 bg-gradient-to-r from-blue-600/0 via-indigo-600/0 to-purple-600/0 group-hover:from-blue-600/8 group-hover:via-indigo-600/6 group-hover:to-purple-600/4 transition-all duration-400 rounded-2xl"></div>
-      
+
       {/* Subtle shine effect */}
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/0 to-transparent group-hover:via-white/10 transition-all duration-400 rounded-2xl"></div>
     </div>
@@ -115,16 +114,14 @@ const menuData = {
   ],
 
   "Petit-déj": [
-    { name: "Beau matin", price: "14.900", desc: "Café, mini jus, eau, viennoiserie, beurre, confiture, omelette fromage" },
-    { name: "Business Women", price: "28.400", desc: "Café, eau, mini jus, viennoiserie, fruit coupé, crêpe, waffle chocolat, gâteau, cheese cake, charcuterie, beurre, confiture, miel, nutella" },
-    { name: "Business Men", price: "35.400", desc: "Café, mini jus, eau, pains maison, croque monsieur, charcuterie, poulet assorti, omelette, crêpe fourrée escalope, pizza, harissa, huile d’olive, olives" },
-    { name: "Healthy", price: "29.400", desc: "Lait détox, chia pudding, omelette blanc d'œuf, toasts, pain cake au miel, pains perdus, fruits" }
+    { name: "Beau matin", price: "14.900", desc: "Café au choix , mini jus,0.5L bouteille d'eau, corbeille viennoiserie, beurre, confiture, omelette au fromage" },
+    { name: "Business Women", price: "28.400", desc: "Café au choix,0.5L bouteille d'eau, mini jus,corbeille viennoiserie, fruit coupé, crêpe chocolat, bubble waffle chocolat, gâteau de jour, cheese cake, cheese cake nutella,assiette fromage charcuterie, beurre, confiture, miel, nutella" },
+    { name: "Business Men", price: "35.400", desc: "Café au choix, mini jus,0.5L bouteille d'eau, corbeille viennoiserie, pains maison, croque-monsieur,assiette charcuterie et fromage,assortiment de poulet(coudron bleu , brochette de poulet , nuggets), omelette au fromage, crêpe fourrée escalope, crêpe fromage,2 tranches pizza napolitain, harissa, huile d’olive, olives" },
+    { name: "Healthy", price: "29.400", desc: "Lait tiéde, eau détox, chia pudding,grains de chia , beurre de cacahuéte, omelette blanc d'œuf, toasts bruschetta, pain cake au miel, pains perdus, fruits coupé" },
+    { name: "Brunch Saphir Bleu", price: "62.800", desc: "2 cafés, 2 mini jus, bouteille eau, corbeille viennoiserie, 2 mini jwajem, crêpe nutella , waffle, brownies, cookies, omelette, ojja merguez, crêpe fourrée escalope ,assiette fromage, charcuterie, assortiment de poulet, beignet de crevette,2 tranches pizza napolitain, buerre,Nutella,Harissa,Huile d’olive,Buurre, olive ,miel, confiture" },
+    { name: "Duo sucré-salé", price: "38.600", desc: "Café au choix, mini jus, 0.5L bouteille eau, corbeille de viennoiserie, assortiment de poulet, omelette au fromage, crêpe nutella, pancake nutella, Harissa, Huile d’olive, Buurre, confiture, miel" }
   ],
 
-  "Brunch": [
-    { name: "Brunch Saphir Bleu", price: "62.800", desc: "2 cafés, mini jus, eau, viennoiserie, 2 jwajem, crêpe, waffle, brownies, cookies, omelette, ojja, crêpe fourrée, charcuterie, poulet, pizza, miel, confiture" },
-    { name: "Duo sucré-salé", price: "38.600", desc: "Café, mini jus, eau, viennoiserie, poulet, omelette, crêpe, pancake, miel, confiture" }
-  ],
 
   "Pasta Italien": [
     { name: "Rigattoni Trois Saveurs", price: "36.400", desc: "Courgette, tomate séchée, crevette, parmesan" },
@@ -178,13 +175,13 @@ const menuData = {
   ],
 
   "Volaille": [
-    { name: "Escalope Mili-Melo", price: "23.400", desc:"(Escalope de poulet pané + Escalope de poullet grillée)" },
+    { name: "Escalope Mili-Melo", price: "23.400", desc: "(Escalope de poulet pané + Escalope de poullet grillée)" },
     { name: "Suprême panée aux amandes", price: "24.700" },
     { name: "Pilon pané au fromage", price: "26.400" },
     { name: "Cordon Bleu Tagliatelle", price: "28.700" },
     { name: "Ballotine Ricotta Épinard", price: "27.400" },
-    { name: "Suprême de poulet sauce au choix", price: "26.400", desc:"(CChampignon, poivre, parmesan, Roquefort)" },
-    { name: "Mille-feuille Chicken Gambas", price: "28.800",desc:"(Mille-feuille d'escalope farcie aux crevettes)" },
+    { name: "Suprême de poulet sauce au choix", price: "26.400", desc: "(CChampignon, poivre, parmesan, Roquefort)" },
+    { name: "Mille-feuille Chicken Gambas", price: "28.800", desc: "(Mille-feuille d'escalope farcie aux crevettes)" },
     { name: "Escalope Normandie", price: "29.600", desc: "(Crevette, saumon, sauce crustacée)" },
     { name: "Chicken Crispy sauce chili", price: "26.400" }
   ],
@@ -276,12 +273,24 @@ const menuData = {
   ],
 
   "Ice (Glacé)": [
-    { name: "Caramel", price: "12.000" },
-    { name: "Nutella", price: "12.000" },
-    { name: "Coco fruits secs", price: "13.500" },
-    { name: "Kinder Banane", price: "13.700" },
-    { name: "Oréo chocolat blanc", price: "14.000" },
-    { name: "Ferrero gaufre", price: "14.500" }
+    { name: "à L'Italiano Néro Caramel", price: "17.000" },
+    { name: " à L'Italiano Néro Nutella fruit sec", price: "17.000" },
+    { name: "à L'Italiano Néro Spiculose", price: "17.000" },
+    { name: "à L'Italiano Néro Oréo", price: "17.000" },
+    { name: "à L'Italiano Néro Frerrro Noisette", price: "19.500" },
+    { name: "Fruty Banane Framboise", price: "19.500" },
+    { name: "Fruty Pêche Melon", price: "20.000" },
+    { name: "Fruty Exotique", price: "20.000" },
+    { name: "Fruty Fruit saison", price: "21.000" },
+    { name: "Shake Classique", price: "12.000" ,desc: "chocolat,fraise,pistache..." },
+    { name: "Shake Red velvet", price: "13.500" ,desc: "glace vanille,amande,grenadine" },
+    { name: "Shake Maestro", price: "19.000" ,desc: "glace vanille,maestro,kajou" },
+    { name: "Shake Snickers", price: "19.000" ,desc: "glace vanille,snickers,caramel,cacahouète" },    
+    { name: "Shake Fantastic", price: "19.000" ,desc: "glace vanille,melon" },
+    { name: "Shake Five Stars", price: "19.000" ,desc: "glace vanille,miel,flacon d'avion,fraise" },
+    { name: "Boule à Boule Dio", price: "6.000" ,desc: "2 B.G aux choix , garniture" },    
+    { name: "Boule à Boule Argumend", price: "7.500" ,desc: "3 B.G aux choix , Citron" }    
+    
   ],
 
   "JwaJem": [
@@ -396,8 +405,8 @@ const menuData = {
     { name: "Couscous au fruit de mer", price: "37.400" },
     { name: "Couscous au mérou", price: "42.800" },
     { name: "Couscous Royale", price: "44.200", desc: "(Agneau, merguez, poulet, œuf)" },
-    { name: "Symphonie Volaille", price: "96.200", desc: "Escalope sauce champignon, grillé, pané, brochette poulet, cordon bleu, pilon pané, Alfredo, salade césar, frites" },
-    { name: "Bateau Pirate", price: "140.000", desc: "Crevette, poulpe, sèche, calamars, filet poisson pané, amandes, moule marinée, fruits de mer sautés, tempura crevettes, frites, pâte aux crevettes" }
+    { name: "Symphonie Volaille", price: "96.200", desc: "Escalope sauce champignon, grillé, pané, brochette poulet, nuggets, cordon bleu, pilon pané, Alfredo, salade césar, frites" },
+    { name: "Bateau Pirate", price: "140.000", desc: "Crevette, poulpe, sèche, calamar doré, filet poisson pané aux amandes en filet,posson grillé, Kamounia à la poulpe, moule marinée, fruits de mer sautés, tempura crevettes, frites, pâte aux crevettes" }
   ]
 };
 
@@ -458,11 +467,12 @@ const categoryImages = {
 
 
 
-export default function MenuPage(){
+export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState(null)
   const [isLoading, setIsLoading] = useState(false)
   const [searchTerm, setSearchTerm] = useState('')
   const pendingScrollRef = useRef(null)
+  const savedScrollRef = useRef(null) // stores scroll position on the categories page before opening a category
 
   // helper to create safe ids for DOM elements; identifier can be index or item name
   const makeId = (category, identifier) => {
@@ -481,6 +491,8 @@ export default function MenuPage(){
   // open a category and optionally scroll to a specific item (index or name)
   const openCategory = (category, itemIndex = null) => {
     // determine an itemName if an index was provided so the scroll target remains stable
+    // save current scroll position so we can restore it when returning to categories
+    try { savedScrollRef.current = window.scrollY || window.pageYOffset || 0 } catch (e) { savedScrollRef.current = null }
     let itemName = null
     if (itemIndex !== null && itemIndex !== undefined) {
       if (typeof itemIndex === 'number') {
@@ -499,7 +511,7 @@ export default function MenuPage(){
       // push a history entry so browser Back returns to categories view
       try {
         window.history.pushState({ category }, '', `?category=${encodeURIComponent(category)}`)
-      } catch (e) {}
+      } catch (e) { }
       setIsLoading(false)
     }, 200)
   }
@@ -587,13 +599,15 @@ export default function MenuPage(){
     // clear any active search when selecting a category from the grid
     setSearchTerm('')
     setIsLoading(true)
+    // save current scroll position of the categories page before navigating
+    try { savedScrollRef.current = window.scrollY || window.pageYOffset || 0 } catch (e) { savedScrollRef.current = null }
     // Scroll to top of page smoothly
     window.scrollTo({ top: 0, behavior: 'smooth' })
     setTimeout(() => {
       setSelectedCategory(category)
       try {
         window.history.pushState({ category }, '', `?category=${encodeURIComponent(category)}`)
-      } catch (e) {}
+      } catch (e) { }
       setIsLoading(false)
     }, 300)
   }
@@ -608,14 +622,20 @@ export default function MenuPage(){
         window.history.back()
         return
       }
-    } catch (e) {}
+    } catch (e) { }
     setSelectedCategory(null)
     // Clear any active focus states
     if (document.activeElement && document.activeElement !== document.body) {
       document.activeElement.blur()
     }
-    // Scroll to top when going back to categories
-    window.scrollTo({ top: 0, behavior: 'smooth' })
+    // Restore previous scroll position if we saved one, otherwise scroll to top
+    const restore = savedScrollRef.current
+    if (restore != null) {
+      setTimeout(() => window.scrollTo({ top: restore, behavior: 'smooth' }), 120)
+      savedScrollRef.current = null
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
   }
 
   // Manage browser history/popstate so Back/Forward toggles category view
@@ -628,7 +648,7 @@ export default function MenuPage(){
       if (initialCategory) {
         setSelectedCategory(initialCategory)
       }
-    } catch (e) {}
+    } catch (e) { }
 
     const onPop = (e) => {
       const state = e.state
@@ -650,11 +670,25 @@ export default function MenuPage(){
     return () => window.removeEventListener('popstate', onPop)
   }, [])
 
+  // If selectedCategory becomes null (for example via popstate/back), restore saved scroll position.
+  useEffect(() => {
+    if (selectedCategory === null) {
+      const restore = savedScrollRef.current
+      if (restore != null) {
+        // small delay to allow layout to settle
+        setTimeout(() => {
+          try { window.scrollTo({ top: restore, behavior: 'smooth' }) } catch (e) { window.scrollTo(0, restore) }
+        }, 80)
+        savedScrollRef.current = null
+      }
+    }
+  }, [selectedCategory])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50/20 to-indigo-50/30">
       {/* Header with bigger cover */}
       <header className="relative">
-        <div 
+        <div
           className={`relative ${selectedCategory ? 'h-72 md:h-80 lg:h-96' : 'h-60 md:h-72 lg:h-80'} bg-cover bg-center`}
           style={{
             backgroundImage: selectedCategory ? `url('${categoryImages[selectedCategory] || '/assets/cover.jpg'}')` : "url('/assets/cover.jpg?v=2')",
@@ -662,15 +696,15 @@ export default function MenuPage(){
         >
           {/* Professional overlay - stronger when category selected for readability */}
           <div className={`absolute inset-0 ${selectedCategory ? 'bg-gradient-to-b from-black/40 via-black/50 to-black/60' : 'bg-gradient-to-b from-black/30 via-black/40 to-black/60'}`}></div>
-          
+
           {/* Header Content */}
           <div className="relative z-10 flex flex-col h-full">
             {/* Top bar with navigation buttons */}
             <div className="flex items-center justify-between p-4">
               {!selectedCategory ? (
                 // Show "Retour" button when on main page (categories view)
-                <a 
-                  href="/" 
+                <a
+                  href="/"
                   className="flex items-center gap-2 px-4 py-2 bg-white/90 backdrop-blur-sm rounded-lg text-sm hover:bg-white transition-all shadow-lg border border-white/50"
                 >
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -680,7 +714,7 @@ export default function MenuPage(){
                 </a>
               ) : (
                 // Show "Catégories" button on the LEFT when in a category
-                <button 
+                <button
                   onClick={handleBackToCategories}
                   className="flex items-center gap-2 px-4 py-2 bg-blue-600/90 backdrop-blur-sm rounded-lg text-sm text-white hover:bg-blue-700 transition-all shadow-lg"
                 >
@@ -690,11 +724,11 @@ export default function MenuPage(){
                   Catégories
                 </button>
               )}
-              
+
               {/* Empty div to maintain flex spacing */}
               <div></div>
             </div>
-            
+
             {/* Center content */}
             <div className="flex-1 flex items-center justify-center px-4">
               <div className="text-center w-full">
@@ -783,13 +817,13 @@ export default function MenuPage(){
               <p className="text-slate-600 text-lg md:text-xl font-medium max-w-2xl mx-auto leading-relaxed">Découvrez notre sélection de plats authentiques et savoureux, préparés avec passion</p>
               <div className="w-32 h-1 bg-gradient-to-r from-blue-500 via-indigo-500 to-purple-500 mx-auto mt-6 rounded-full"></div>
             </div>
-            
+
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 max-w-5xl mx-auto">
               {categories.map((category, index) => (
                 <div
                   key={category}
                   className="opacity-0 animate-fadeInUp"
-                  style={{ 
+                  style={{
                     animationDelay: `${index * 100}ms`,
                     animationFillMode: 'forwards'
                   }}
@@ -820,24 +854,24 @@ export default function MenuPage(){
             ) : (
               <div>
                 {/* category title is shown in the header cover; remove duplicate title here */}
-                
+
                 <div className="grid gap-4 md:gap-6">
                   {sortedItems.map((item, index) => (
                     <div
-                        id={makeId(selectedCategory, item.name)}
-                        key={`${selectedCategory}-${index}`}
-                        className="opacity-0 animate-fadeInUp"
-                        style={{ 
-                          animationDelay: `${index * 50}ms`,
-                          animationFillMode: 'forwards'
-                        }}
-                      >
-                        <Item
-                          name={item.name}
-                          price={item.price}
-                          desc={item.desc}
-                        />
-                      </div>
+                      id={makeId(selectedCategory, item.name)}
+                      key={`${selectedCategory}-${index}`}
+                      className="opacity-0 animate-fadeInUp"
+                      style={{
+                        animationDelay: `${index * 50}ms`,
+                        animationFillMode: 'forwards'
+                      }}
+                    >
+                      <Item
+                        name={item.name}
+                        price={item.price}
+                        desc={item.desc}
+                      />
+                    </div>
                   ))}
                 </div>
               </div>
@@ -845,7 +879,7 @@ export default function MenuPage(){
           </div>
         )}
       </main>
-      
+
       {/* Add custom animations */}
       <style jsx>{`
         @keyframes fadeInUp {
